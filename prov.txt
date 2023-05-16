@@ -1,0 +1,105 @@
+} while (true);
+
+
+            
+            
+
+            string[,] board = new string[3, 3];
+            bool playerTurn = true;
+            bool gameOver = false;
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    board[i, j] = "";
+                }
+            }
+            while (!gameOver)
+            {
+                DrawTable(board);
+
+                if (playerTurn)
+                {
+                    int x;
+                    
+                    while (true)
+                    {
+                        Console.Write("Введите x: ");
+                        string x0 = Console.ReadLine();
+                        int error = 0;
+                        foreach (var ch in x0)
+                        {
+                            if (!char.IsDigit(ch) || x0 == "" )
+                            {
+                                Console.WriteLine("Ошибка. Можно вводить только 0 1 2");
+                                error++;
+                            }
+                            
+                        }
+                        if (error == 0 && x0 != "")
+                        {
+                            
+                            x = int.Parse(x0);
+                            if(x < 0 || x > 2)
+                            {
+                                Console.WriteLine("Ошибка. Можно вводить только 0 1 2");
+                                
+                            }
+                            else
+                            break;
+                        }
+                        else if(x0 == "")
+                            Console.WriteLine("Ошибка. Можно вводить только 0 1 2");
+                        
+                    }
+                    int y;
+                        while (true)
+                    {
+                        Console.Write("Введите y: ");
+                        string y0 = Console.ReadLine();
+                        int error = 0;
+                        foreach (var ch in y0)
+                        {
+                            if (!char.IsDigit(ch) || y0 == "")
+                            {
+                                Console.WriteLine("Ошибка. Можно вводить только 0 1 2");
+                                error++;
+                            }
+                        }
+                        if (error == 0 && y0 != "")
+                        {
+                            y = int.Parse(y0);
+                            if(y < 0 || y > 2)
+                            {
+                                Console.WriteLine("Ошибка. Можно вводить только 0 1 2");
+                            }
+                            else
+                            break;
+                        }
+                        else if (y0 == "")
+                            Console.WriteLine("Ошибка. Можно вводить только 0 1 2");
+                    }                   
+                    string period1 = Convert.ToString(x);
+                    string period2 = Convert.ToString(y);
+                    
+                    PlayerMove(board,period1,period2);
+                }
+                else
+                {
+                    ComputerMove(board);
+                }
+  private static void ComputerMove(string[,] board)
+            {
+                Random rnd = new Random();
+                int x = -1; int y = -1;
+            while (true)
+            {
+                x = rnd.Next(0, 3); y = rnd.Next(0, 3);
+
+                if (board[x, y] == "")
+                {
+                    break;
+
+                }
+            };
